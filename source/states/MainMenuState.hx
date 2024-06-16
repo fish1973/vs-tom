@@ -2,6 +2,7 @@ package states;
 
 import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.display.FlxBackdrop;
 import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
@@ -45,13 +46,15 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
 		add(bg);
+
+		var colorTween = FlxTween.color(bg, 3, 0xFF51c273, 0xFF4e2b8a, { type: PINGPONG, ease: FlxEase.smootherStepInOut } );
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -65,6 +68,17 @@ class MainMenuState extends MusicBeatState
 		magenta.visible = false;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
+
+		var grid:FlxBackdrop = new FlxBackdrop(Paths.image('grid'));
+		grid.scrollFactor.set();
+		grid.setGraphicSize(Std.int(grid.width * 3), Std.int(grid.height * 3));
+		grid.color = 0xFF000000;
+		grid.velocity.set(100, 100);
+		grid.updateHitbox();
+		grid.alpha = 0.2;
+		grid.screenCenter(X);
+		add(grid);
+		//grid code stolen from vs joeseph (thanks fyrid)
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);

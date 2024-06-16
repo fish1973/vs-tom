@@ -88,6 +88,7 @@ class ClientPrefs {
 		'note_left'		=> [A, LEFT],
 		'note_down'		=> [S, DOWN],
 		'note_right'	=> [D, RIGHT],
+		'emote'			=> [C, E],
 		
 		'ui_up'			=> [W, UP],
 		'ui_left'		=> [A, LEFT],
