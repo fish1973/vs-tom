@@ -118,9 +118,9 @@ class PauseSubState extends MusicBeatSubstate
 			descText = "Description goes here. 'Nuff said.";
 		} //so proud of myself for coding this (at the time of writing i have very little haxe experience)
 
-		var description:FlxText = new FlxText(warioX, 15 + 200, (FlxG.width - 600), descText, 32);
+		var description:FlxText = new FlxText(warioX, 15 + 133, (FlxG.width - 600), descText, 31);
 		description.scrollFactor.set();
-		description.setFormat(Paths.font('vcr.ttf'), 32);
+		description.setFormat(Paths.font('vcr.ttf'), 31);
 		description.updateHitbox();
 		add(description);
 
@@ -447,6 +447,7 @@ class PauseSubState extends MusicBeatSubstate
 				skipTimeText.scrollFactor.set();
 				skipTimeText.borderSize = 2;
 				skipTimeTracker = item;
+				skipTimeText.screenCenter();
 				add(skipTimeText);
 
 				updateSkipTextStuff();
@@ -461,7 +462,7 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		if(skipTimeText == null || skipTimeTracker == null) return;
 
-		skipTimeText.x = skipTimeTracker.x + skipTimeTracker.width + 60;
+		skipTimeText.x = skipTimeTracker.x + skipTimeTracker.width - 1280;
 		skipTimeText.y = skipTimeTracker.y;
 		skipTimeText.visible = (skipTimeTracker.alpha >= 1);
 	}
