@@ -111,6 +111,7 @@ class FreeplaySelectState extends MusicBeatState
 		if(controls.BACK) {
 			if (!lockScreen) {
 				MusicBeatState.switchState(new MainMenuState());
+				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.mouse.visible = false;
 			}
 		}

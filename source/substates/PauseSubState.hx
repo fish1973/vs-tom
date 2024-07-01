@@ -99,6 +99,10 @@ class PauseSubState extends MusicBeatSubstate
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
+		if (PlayState.SONG.song == 'Killer') {
+			levelInfo.text = 'Evil Killer Mario & Super Killer Luigi (AKA The Super Evil Killer'; //had to cut it off because i was too lazy to move the other text down and shit
+		}
+
 		var levelDifficulty:FlxText = new FlxText(warioX, 15 + 32, FlxG.width, Difficulty.getString().toUpperCase(), 32);
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('vcr.ttf'), 32);
