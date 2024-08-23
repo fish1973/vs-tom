@@ -26,6 +26,8 @@ import cutscenes.DialogueBoxPsych;
 
 import states.StoryMenuState;
 import states.FreeplayState;
+import states.LegacyFreeplayState;
+import states.FreeplaySelectState;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
 
@@ -2380,12 +2382,22 @@ class PlayState extends MusicBeatState
 					LoadingState.loadAndSwitchState(new PlayState());
 				}
 			}
-			else
+			else if (!isStoryMode && FreeplaySelectState.category == 'legacy')
 			{
 				trace('WENT BACK TO FREEPLAY??');
 				Mods.loadTopMod();
 				#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
+				MusicBeatState.switchState(new LegacyFreeplayState());
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				changedDifficulty = false;
+			}
+			else if (!isStoryMode && FreeplaySelectState.category != 'legacy')
+			{
+				trace('WENT BACK TO FREEPLAY??');
+				Mods.loadTopMod();
+				#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
+	
 				MusicBeatState.switchState(new FreeplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;

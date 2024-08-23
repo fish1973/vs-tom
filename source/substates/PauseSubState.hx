@@ -352,7 +352,7 @@ class PauseSubState extends MusicBeatSubstate
 					if(PlayState.isStoryMode) {
 						MusicBeatState.switchState(new StoryMenuState()); 
 					}
-					else if(FreeplaySelectState.category == 'legacy') {
+					else if(!PlayState.isStoryMode && FreeplaySelectState.category == 'legacy') {
 						MusicBeatState.switchState(new LegacyFreeplayState());
 					}
 					else if (!PlayState.isStoryMode && FreeplaySelectState.category != 'legacy') {
