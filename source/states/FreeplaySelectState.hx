@@ -22,6 +22,7 @@ class FreeplaySelectState extends MusicBeatState
 	var lockScreen:Bool = false;
 
 	var xd:FlxSprite;
+	var luigiText:FlxText;
 
 	override function create()
 	{
@@ -80,21 +81,28 @@ class FreeplaySelectState extends MusicBeatState
 					case 'extra':
 						categoryImage.x = 100;
 						categoryImage.y = Std.int(180 + 263 + 35);
-					case 'legacy':
+					case 'mystery':
 						categoryImage.y = Std.int(180 + 263 + 35);
 						categoryImage.screenCenter(X);
-					case 'mystery':
+					case 'legacy':
 						categoryImage.x = Std.int(FlxG.width - 339 - 100);
 						categoryImage.y = Std.int(180 + 263 + 35);
 				}
 			}
 
-		xd = new FlxSprite().loadGraphic(Paths.image('xd'));
-		xd.scrollFactor.set();
-		xd.updateHitbox();
-		xd.screenCenter();
+		xd = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		xd.alpha = 0;
 		add(xd);
+
+		luigiText = new FlxText(0, 0, FlxG.width,
+			"You must complete all songs in the \n
+			Story, Side, and Extra categories \n
+			in order to enter this category. \n \n
+			Press Accept to exit.", 32);
+		luigiText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		luigiText.screenCenter(Y);
+		luigiText.alpha = 0;
+		add(luigiText);
 
 		super.create();
 		
@@ -106,6 +114,8 @@ class FreeplaySelectState extends MusicBeatState
 			lockScreen = false;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxTween.tween(xd, {alpha: 0}, 0.5);
+			FlxTween.tween(luigiText, {alpha: 0}, 0.5);
+			FlxTween.tween(FlxG.sound.music, {volume: 1}, 1);
 		}
 
 		if(controls.BACK) {
@@ -140,7 +150,10 @@ class FreeplaySelectState extends MusicBeatState
 								MusicBeatState.switchState(new FreeplayState());
 							case 'mystery':
 								lockScreen = true;
-								FlxTween.tween(xd, {alpha: 1}, 3);
+								FlxTween.tween(xd, {alpha: 0.6}, 1);
+								FlxTween.tween(luigiText, {alpha: 1}, 1);
+								FlxTween.tween(FlxG.sound.music, {volume: 0}, 1);
+								FlxG.sound.play(Paths.sound('mysteryLocked'), 2);
 						}
 					}
 			}
