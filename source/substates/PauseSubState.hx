@@ -12,6 +12,8 @@ import flixel.util.FlxStringUtil;
 
 import states.StoryMenuState;
 import states.FreeplayState;
+import states.LegacyFreeplayState;
+import states.FreeplaySelectState;
 import options.OptionsState;
 
 class PauseSubState extends MusicBeatSubstate
@@ -346,10 +348,16 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.seenCutscene = false;
 
 					Mods.loadTopMod();
-					if(PlayState.isStoryMode)
-						MusicBeatState.switchState(new StoryMenuState());
-					else 
+
+					if(PlayState.isStoryMode) {
+						MusicBeatState.switchState(new StoryMenuState()); 
+					}
+					else if(FreeplaySelectState.category == 'legacy') {
+						MusicBeatState.switchState(new LegacyFreeplayState());
+					}
+					else if (!PlayState.isStoryMode && FreeplaySelectState.category != 'legacy') {
 						MusicBeatState.switchState(new FreeplayState());
+					}
 
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;

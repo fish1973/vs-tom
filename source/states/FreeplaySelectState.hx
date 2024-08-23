@@ -20,7 +20,7 @@ class FreeplaySelectState extends MusicBeatState
 	var curSelected:Int = -1;
 	var chose:Bool = false;
 	var lockScreen:Bool = false;
-	public static var category:String = "";
+	public static var category:String;
 
 	var xd:FlxSprite;
 	var luigiText:FlxText;
@@ -155,7 +155,7 @@ class FreeplaySelectState extends MusicBeatState
 							case 'extra':
 								MusicBeatState.switchState(new FreeplayState());
 							case 'legacy':
-								MusicBeatState.switchState(new FreeplayState());
+								MusicBeatState.switchState(new LegacyFreeplayState());
 							case 'mystery':
 								lockScreen = true;
 								FlxTween.tween(xd, {alpha: 0.6}, 1);
