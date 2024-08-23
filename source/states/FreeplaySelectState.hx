@@ -10,7 +10,7 @@ class FreeplaySelectState extends MusicBeatState
 {
 	var clicked:Bool = false;
 
-	var garbo:Array<String> = ['story', 'side', 'extra', 'legacy', 'mystery'];
+	var garbo:Array<String> = ['story', 'side', 'extra', 'mystery', 'legacy'];
 	var categoryImage:FlxSprite;
 	var bs:FlxTypedGroup<FlxSprite>;
 
@@ -20,9 +20,11 @@ class FreeplaySelectState extends MusicBeatState
 	var curSelected:Int = -1;
 	var chose:Bool = false;
 	var lockScreen:Bool = false;
+	public static var category:String = "";
 
 	var xd:FlxSprite;
 	var luigiText:FlxText;
+	var titleText:FlxText;
 
 	override function create()
 	{
@@ -33,6 +35,7 @@ class FreeplaySelectState extends MusicBeatState
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
+		//idk if this is actually necessary at all but i'm keeping it just in case
 
 		persistentUpdate = true;
 
@@ -58,6 +61,10 @@ class FreeplaySelectState extends MusicBeatState
 		grid.screenCenter(X);
 		add(grid);
 		//grid code stolen from vs joeseph (thanks fyrid) also this bg stuff is just taken from the main menu
+
+		titleText = new FlxText(0, 60, FlxG.width, "Choose a Category", 32);
+		titleText.setFormat("VCR OSD Mono", 60, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(titleText);
 
 		bs = new FlxTypedGroup<FlxSprite>();
 		add(bs);
@@ -135,6 +142,7 @@ class FreeplaySelectState extends MusicBeatState
 							FlxTween.cancelTweensOf(bs.members[i]);
 							chose = true;
 							FlxG.mouse.visible = false;
+							category = garbo[curSelected];
 							FlxTween.tween(bs.members[i], {'scale.x': 1, 'scale.y': 1}, 0.3, {ease: FlxEase.backInOut});
 							bs.members[i].color = 0xFFFFFF;
 						}
@@ -155,7 +163,7 @@ class FreeplaySelectState extends MusicBeatState
 								FlxTween.tween(FlxG.sound.music, {volume: 0}, 1);
 								FlxG.sound.play(Paths.sound('mysteryLocked'), 2);
 						}
-					}
+				}
 			}
 		}
 
@@ -164,11 +172,11 @@ class FreeplaySelectState extends MusicBeatState
 				if (item.ID == curSelected) {
 					FlxTween.cancelTweensOf(item);
 					grow = FlxTween.tween(item, {'scale.x': 1.1, 'scale.y': 1.1}, 0.3, {ease: FlxEase.quartOut});
-					item.color = 0xCACACA;
-				} else if (item.ID != curSelected && item.color != 0xFFFFFF) {
+					item.color = 0xFFFFFF;
+				} else if (item.ID != curSelected && item.color != 0xCACACA) {
 					FlxTween.cancelTweensOf(item);
 					shrink = FlxTween.tween(item, {'scale.x': 1, 'scale.y': 1}, 0.3, {ease: FlxEase.quartOut});
-					item.color = 0xFFFFFF;
+					item.color = 0xCACACA;
 				}
 			}
 		}
