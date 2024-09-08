@@ -62,6 +62,7 @@ class LegacyFreeplayState extends MusicBeatState
 
 		addSong('Obstruction', 1, 'wahoo-1', FlxColor.fromRGB(40, 253, 113));
 		addSong('frustration old', 1, 'wahoo-1', FlxColor.fromRGB(40, 253, 113));
+		addSong('desperation old', 1, 'wahoo-1', FlxColor.fromRGB(40, 253, 113));
 		addSong('Forgery', 1, 'wahoo-fake-1', FlxColor.fromRGB(80, 173, 33));
 		addSong('Derivative', 1, 'wahoo-fake-1', FlxColor.fromRGB(80, 173, 33));
 

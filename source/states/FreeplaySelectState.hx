@@ -102,9 +102,9 @@ class FreeplaySelectState extends MusicBeatState
 		add(xd);
 
 		luigiText = new FlxText(0, 0, FlxG.width,
-			"You must complete all songs in the \n
-			Story, Side, and Extra categories \n
-			in order to enter this category. \n \n
+			"You must complete all songs in the\n
+			Story, Side, and Extra categories\n
+			in order to enter this category.\n\n
 			Press Accept to exit.", 32);
 		luigiText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		luigiText.screenCenter(Y);
